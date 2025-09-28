@@ -12,6 +12,7 @@ TagManager:
   - EnemyBullet
   - Tile
   - BossBorder
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - EnemyGhost
   - PlayerInvincible
   - Pickup
-  - 
+  - Coin
   - 
   - 
   - 

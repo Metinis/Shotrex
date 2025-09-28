@@ -9,11 +9,11 @@ public class BulletCollision : MonoBehaviour
         bool otherIsBullet = other.CompareTag("Bullet");
         bool otherIsEnemy = other.CompareTag("Enemy");
         bool isEnemyBullet = gameObject.CompareTag("Enemy");
-        if (isPlayerBullet && !otherIsPlayer && !otherIsBullet)
+        if (isPlayerBullet && !otherIsPlayer && !otherIsBullet && !other.CompareTag("Coin"))
         {
             Destroy(gameObject);
         }
-        else if (isEnemyBullet && !otherIsEnemy)
+        else if (isEnemyBullet && !otherIsEnemy && !other.CompareTag("Coin"))
         {
             Destroy(gameObject);
         }

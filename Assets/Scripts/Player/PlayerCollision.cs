@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+
 public class PlayerCollision : MonoBehaviour
 {
     public float invincibilityDuration = 1.0f;
@@ -20,6 +22,12 @@ public class PlayerCollision : MonoBehaviour
         else if (other.CompareTag("Enemy"))
         {
             EnemyCollision();
+        }
+        else if (other.CompareTag("Coin"))
+        {
+            GameObject.Find("ScoreSystem").GetComponent<ScoreSystem>().AddScore(1);
+            GetComponent<RetroSound>().PlayCoinPickup();
+            Destroy(other.gameObject);
         }
     }
 

@@ -170,6 +170,33 @@ public class RetroSound : MonoBehaviour
 
         audioSource.PlayOneShot(clip);
     }
+    public void PlayCoinPickup()
+    {
+        int sampleRate = 44100;
+        float duration = 0.15f; // short and snappy
+        int sampleLength = (int)(sampleRate * duration);
+        float startFreq = 800f; // medium-high
+        float endFreq = 1200f;  // rises quickly
+        float[] samples = new float[sampleLength];
+
+        for (int i = 0; i < sampleLength; i++)
+        {
+            float t = i / (float)sampleLength;
+            float freq = Mathf.Lerp(startFreq, endFreq, t);
+
+            // square wave for retro sound
+            samples[i] = Mathf.Sign(Mathf.Sin(2 * Mathf.PI * freq * i / sampleRate));
+
+            // optional: fade out quickly
+            samples[i] *= 1.0f - t;
+        }
+
+        AudioClip clip = AudioClip.Create("CoinPickup", sampleLength, 1, sampleRate, false);
+        clip.SetData(samples, 0);
+
+        audioSource.PlayOneShot(clip);
+    }
+
 
 
 
