@@ -36,7 +36,7 @@ public class PlayerCollision : MonoBehaviour
         GetComponent<PlayerShooter>().DowngradeGun();
         gameObject.layer = LayerMask.NameToLayer("PlayerInvincible");
         hit = true;
-        Flash();
+        GetComponent<Flash>().FlashSprite();
     }
 
     void FixedUpdate()
@@ -56,19 +56,5 @@ public class PlayerCollision : MonoBehaviour
         }
         
     }
-    private void Flash()
-    {
-        StartCoroutine(DoFlash());
-    }
-
-    private System.Collections.IEnumerator DoFlash()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            spriteRenderer.enabled = false;
-            yield return new WaitForSeconds(0.1f);
-            spriteRenderer.enabled = true; 
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
+    
 }

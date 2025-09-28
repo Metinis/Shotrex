@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 input;
     
     bool jump = false;
+    bool grounded = false;
 
     void Start()
     {
@@ -23,11 +24,9 @@ public class PlayerController : MonoBehaviour
         input.x = 0;
         if (Keyboard.current.dKey.isPressed) input.x += 1;
         if (Keyboard.current.aKey.isPressed) input.x -= 1;
-
-        jump = Keyboard.current.spaceKey.wasPressedThisFrame && IsGrounded();
-        if (jump)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            jump = true;
         }
     }
 
@@ -37,22 +36,47 @@ public class PlayerController : MonoBehaviour
         float speedDiff = targetSpeed - rb.linearVelocity.x;
         float movement = Mathf.Sign(speedDiff) * acceleration * Time.fixedDeltaTime;
         if (Mathf.Abs(movement) > Mathf.Abs(speedDiff)) movement = speedDiff;
+        grounded = IsGrounded();
+        
+        float yVelocity = rb.linearVelocity.y;
+        if (grounded && !jump)
+        {
+            yVelocity = 0;
+        }
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x + movement, rb.linearVelocity.y);
+        if (grounded && jump)
+        {
+            yVelocity = jumpForce;
+            jump = false;
+        }
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x + movement, yVelocity);
+        
     }
 
-    bool IsGrounded()
+    public bool IsGrounded()
     {
-        // Get the collider attached to the player
         Collider2D col = GetComponent<Collider2D>();
-
-        // Start the ray slightly above the bottom of the collider
-        Vector2 rayOrigin = new Vector2(col.bounds.center.x, col.bounds.min.y + 0.01f);
     
-        float rayLength = 0.1f; // small distance to check for ground
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, rayLength, groundLayer);
+        // Center of the BoxCast is slightly above the bottom of the collider
+        Vector2 origin = new Vector2(col.bounds.center.x, col.bounds.min.y + 0.05f);
 
-        Debug.DrawRay(rayOrigin, Vector2.down * rayLength, Color.red);
+        // Make the box narrow (only cover the feet)
+        Vector2 size = new Vector2(col.bounds.size.x * 0.5f, 0.1f); 
+
+        float extraHeight = 0.05f; // small distance to check below feet
+
+        RaycastHit2D hit = Physics2D.BoxCast(origin, size, 0f, Vector2.down, extraHeight, groundLayer);
+
+        // Draw for debugging
+        Debug.DrawRay(origin, Vector2.down * (size.y/2 + extraHeight), Color.red);
+
         return hit.collider != null;
     }
+
+    public bool IsJumping()
+    {
+        return jump;
+    }
+    
+    
 }

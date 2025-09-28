@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Bottom
   - PowerUp
+  - EnemyBullet
+  - Tile
   layers:
   - Default
   - TransparentFX
@@ -18,9 +20,9 @@ TagManager:
   - UI
   - Enemy
   - Player
-  - 
-  - 
-  - 
+  - EnemyGhost
+  - PlayerInvincible
+  - Pickup
   - 
   - 
   - 
@@ -43,8 +45,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3344095391
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Entities
+    uniqueID: 3156538191
     locked: 0
   m_RenderingLayers:
   - Default

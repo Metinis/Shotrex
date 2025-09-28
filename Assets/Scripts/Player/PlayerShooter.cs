@@ -31,11 +31,11 @@ public class PlayerShooter : MonoBehaviour
             duration = 0.0f;
             Vector2 direction = Vector2.right;
             PlayerSpriteController controller = GetComponent<PlayerSpriteController>();
-            if (controller.walkingRight && !controller.facingUp)
+            if (controller.walkingRight && !controller.facingUp && !controller.facingDown)
             {
                 direction = Vector2.right;
             }
-            else if (!controller.walkingRight && !controller.facingUp)
+            else if (!controller.walkingRight && !controller.facingUp && !controller.facingDown)
             {
                 direction = Vector2.left;
             }
@@ -50,6 +50,18 @@ public class PlayerShooter : MonoBehaviour
             else if(controller.facingUp && controller.idle)
             {
                 direction = Vector2.up;
+            }
+            else if (controller.walkingRight && controller.facingDown && !controller.idle)
+            {
+                direction = new Vector2(1f, -0.6f).normalized;
+            }
+            else if (!controller.walkingRight && controller.facingDown && !controller.idle)
+            {
+                direction = new Vector2(-1f, -0.6f).normalized;
+            }
+            else if (controller.facingDown && controller.idle)
+            {
+                direction = Vector2.down;
             }
             bullet.GetComponent<BulletMovement>().direction = direction;
             Instantiate(bullet, transform.position, Quaternion.identity);
@@ -91,7 +103,7 @@ public class PlayerShooter : MonoBehaviour
                 shotCooldown = 0.3f;
                 break;
         }
-
+        GetComponent<PlayerSpriteController>().SetSprites(gun);
         currentGun = gun;
     }
 
@@ -107,7 +119,7 @@ public class PlayerShooter : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-        currentGun--;
+        
+        SetGun(--currentGun);
     }
 }

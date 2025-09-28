@@ -4,20 +4,37 @@ using UnityEngine.InputSystem;
 
 public class PlayerSpriteController : MonoBehaviour
 {
-    public Sprite idleSprite;
-    public Sprite[] walkSprites;
+    public Sprite idleSpritePistol;
+    public Sprite jumpSpritePistol;
+    public Sprite idleSpriteRifle;
+    public Sprite jumpSpriteRifle;
+    public Sprite idleSpriteShotgun;
+    public Sprite jumpSpriteShotgun;
+    public Sprite[] walkSpritesPistol;
+    public Sprite[] walkSpritesRifle;
+    public Sprite[] walkSpritesShotgun;
     private int walkFrame = 0;
     private float timer = 0f;
+
+    private Sprite[] walkSprites;
+    private Sprite jumpSprite;
+    private Sprite idleSprite;
+
     public float frameRate = 0.1f;
     public bool walkingRight = true;
     public bool facingUp = false;
+    public bool facingDown = false;
     public bool idle = true;
 
     private SpriteRenderer sr;
+    private Rigidbody2D rb;
+    private PlayerController controller;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        controller = GetComponent<PlayerController>();
     }
 
     void Update()
@@ -28,7 +45,7 @@ public class PlayerSpriteController : MonoBehaviour
         if (Keyboard.current.wKey.isPressed) input.y += 1;
         if (Keyboard.current.sKey.isPressed) input.y -= 1;
 
-        if (Math.Abs(input.x) > 0)
+        if (Math.Abs(input.x) > 0 && controller.IsGrounded())
         {
             timer += Time.deltaTime;
             if (timer >= frameRate)
@@ -37,6 +54,10 @@ public class PlayerSpriteController : MonoBehaviour
                 walkFrame = (walkFrame + 1) % walkSprites.Length;
                 sr.sprite = walkSprites[walkFrame];
             }
+        }
+        else if(!controller.IsGrounded())
+        {
+            sr.sprite = jumpSprite;
         }
         if (input.x > 0)
         {
@@ -47,7 +68,7 @@ public class PlayerSpriteController : MonoBehaviour
             }
             walkingRight = true;
         }
-        else if(input.x == 0)
+        else if(input.x == 0 && controller.IsGrounded())
         {
             sr.sprite = idleSprite;
             idle = true;
@@ -64,11 +85,18 @@ public class PlayerSpriteController : MonoBehaviour
 
         if (input.y > 0)
         {
+            facingDown = false;
             facingUp = true;
         }
-        else
+        else if (input.y == 0)
         {
             facingUp = false;
+            facingDown = false;
+        }
+        else if(input.y < 0)
+        {
+            facingUp = false;
+            facingDown = true;
         }
         
     }
@@ -76,5 +104,27 @@ public class PlayerSpriteController : MonoBehaviour
     void Rotate()
     {
         transform.Rotate(Vector3.up, 180);
+    }
+
+    public void SetSprites(Gun gun)
+    {
+        if (gun == Gun.Pistol)
+        {
+            walkSprites = walkSpritesPistol;
+            jumpSprite = jumpSpritePistol;
+            idleSprite = idleSpritePistol;
+        }
+        else if (gun == Gun.Rifle)
+        {
+            walkSprites = walkSpritesRifle;
+            jumpSprite = jumpSpriteRifle;
+            idleSprite = idleSpriteRifle;
+        }
+        else
+        {
+            walkSprites = walkSpritesShotgun;
+            jumpSprite = jumpSpriteShotgun;
+            idleSprite = idleSpriteShotgun;
+        }
     }
 }

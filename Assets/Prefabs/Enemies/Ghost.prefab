@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4062309274345866797}
   - component: {fileID: 1047393324712541983}
   - component: {fileID: 3204972861041173095}
+  - component: {fileID: 8572991102195914422}
+  - component: {fileID: 1892896985111933148}
   m_Layer: 6
   m_Name: Ghost
   m_TagString: Enemy
@@ -31,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.65, y: -3.05, z: 0}
-  m_LocalScale: {x: 1.0277, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: -1138429105
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -1327503796, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.73333335, y: 0.8333333}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,8 +127,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.99999994, y: 2}
+  m_Offset: {x: 0.08487606, y: 0.09902227}
+  m_Size: {x: 0.68878746, y: 0.89661145}
   m_Direction: 0
 --- !u!114 &4062309274345866797
 MonoBehaviour:
@@ -142,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   damage: 1
+  scoreValue: 1
 --- !u!50 &1047393324712541983
 Rigidbody2D:
   serializedVersion: 5
@@ -181,8 +184,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d66fc1f6895e44998240da7c0beb7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0}
-  speed: 3
-  player: {fileID: 0}
+  speed: 2
+  player: {fileID: 916877423513603861, guid: 56120544b66af4084a6b253a659273ee, type: 3}
   distanceAgro: 5
   enemyType: 0
+  facingLeft: 1
+--- !u!114 &8572991102195914422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167599998849073595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ad54c468fbd462090ca1b7e58a4b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1892896985111933148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167599998849073595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ed85dc40b60492188d46d95c47db10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleSprite: {fileID: -1327503796, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  walkSprites:
+  - {fileID: -1327503796, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  - {fileID: 1055888974, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  jumpSprite: {fileID: -1327503796, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  frameRate: 0.3

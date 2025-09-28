@@ -19,7 +19,7 @@ public class CameraFollowPlayer : MonoBehaviour
         {
             transform.position = target.position + offset;
         }
-        else if(target.position.y > -3)
+        else if(target.position.y > 2)
         {
             Vector3 pos = transform.position;
             pos.y = target.position.y + offset.y;

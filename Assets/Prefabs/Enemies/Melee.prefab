@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 6828093400618931689}
   - component: {fileID: 7506212687914118363}
   - component: {fileID: 5393099931464364451}
+  - component: {fileID: 3708118582038462368}
+  - component: {fileID: 941347002931544258}
+  - component: {fileID: 5875021421494909745}
   m_Layer: 6
   m_Name: Melee
   m_TagString: Enemy
@@ -31,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2, y: -2.54, z: 0}
-  m_LocalScale: {x: 1.0277, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,12 +83,12 @@ SpriteRenderer:
   m_SortingLayerID: -1138429105
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -1334568020, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.1666666, y: 1.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -121,12 +124,12 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.99999994, y: 2}
+  m_Offset: {x: 0.06781864, y: 0.10172796}
+  m_Size: {x: 0.8643627, y: 1.1997399}
   m_Direction: 0
 --- !u!114 &6828093400618931689
 MonoBehaviour:
@@ -142,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   damage: 1
+  scoreValue: 1
 --- !u!50 &7506212687914118363
 Rigidbody2D:
   serializedVersion: 5
@@ -150,14 +154,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7273618280483181183}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -181,8 +185,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d66fc1f6895e44998240da7c0beb7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0}
-  speed: 3
-  player: {fileID: 0}
+  speed: 1
+  player: {fileID: 916877423513603861, guid: 56120544b66af4084a6b253a659273ee, type: 3}
   distanceAgro: 5
-  enemyType: 0
+  enemyType: 1
+  facingLeft: 1
+--- !u!114 &3708118582038462368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7273618280483181183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee8940e231c34b6e923a1c3230bed20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1.5
+  bullet: {fileID: 9159454757230386577, guid: 7a30e49e4ce044a3fa953dd2c99fd2b2, type: 3}
+--- !u!114 &941347002931544258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7273618280483181183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ad54c468fbd462090ca1b7e58a4b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5875021421494909745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7273618280483181183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ed85dc40b60492188d46d95c47db10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleSprite: {fileID: -1334568020, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  walkSprites:
+  - {fileID: -828809306, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  - {fileID: 884211666, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  jumpSprite: {fileID: -997244701, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  frameRate: 0.3
