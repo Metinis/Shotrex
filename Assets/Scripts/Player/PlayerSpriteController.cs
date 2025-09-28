@@ -9,7 +9,9 @@ public class PlayerSpriteController : MonoBehaviour
     private int walkFrame = 0;
     private float timer = 0f;
     public float frameRate = 0.1f;
-    private bool walkingRight = true;
+    public bool walkingRight = true;
+    public bool facingUp = false;
+    public bool idle = true;
 
     private SpriteRenderer sr;
 
@@ -23,6 +25,8 @@ public class PlayerSpriteController : MonoBehaviour
         Vector2 input = Vector2.zero;
         if (Keyboard.current.dKey.isPressed) input.x += 1;
         if (Keyboard.current.aKey.isPressed) input.x -= 1;
+        if (Keyboard.current.wKey.isPressed) input.y += 1;
+        if (Keyboard.current.sKey.isPressed) input.y -= 1;
 
         if (Math.Abs(input.x) > 0)
         {
@@ -36,6 +40,7 @@ public class PlayerSpriteController : MonoBehaviour
         }
         if (input.x > 0)
         {
+            idle = false;
             if (!walkingRight)
             {
                 Rotate();
@@ -45,14 +50,25 @@ public class PlayerSpriteController : MonoBehaviour
         else if(input.x == 0)
         {
             sr.sprite = idleSprite;
+            idle = true;
         }
         else if (input.x < 0)
         {
+            idle = false;
             if (walkingRight)
             {
                 Rotate();
             }
             walkingRight = false;
+        }
+
+        if (input.y > 0)
+        {
+            facingUp = true;
+        }
+        else
+        {
+            facingUp = false;
         }
         
     }
