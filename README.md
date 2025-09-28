@@ -1,6 +1,6 @@
 ## Welcome to Shotrex!
 
-This is a game project for UMBC Hackathon Game Jam 2025.
+This is a game project in Unity for UMBC Hackathon Game Jam 2025.
 
 ## Features
 
