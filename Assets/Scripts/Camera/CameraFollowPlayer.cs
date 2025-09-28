@@ -4,9 +4,10 @@ public class CameraFollowPlayer : MonoBehaviour
 {
     public Transform target;
     public Vector3 offset;
+    private Collider2D targetCollider;
     void Start()
     {
-        
+        targetCollider = target.GetComponent<Collider2D>();
     }
     void Update()
     {
@@ -15,24 +16,41 @@ public class CameraFollowPlayer : MonoBehaviour
 
     void LateUpdate()
     {
-        if (target.position.x > 0 && target.position.y > -3)
+        Vector3 followPoint;
+
+        if (targetCollider != null)
         {
-            transform.position = target.position + offset;
+            followPoint = targetCollider.bounds.center;
         }
-        else if(target.position.y > 2)
+        else
         {
-            Vector3 pos = transform.position;
-            pos.y = target.position.y + offset.y;
-            pos.z = offset.z;
-            transform.position = pos;
-        }
-        else if(target.position.x > 0)
-        {
-            Vector3 pos = transform.position;
-            pos.x = target.position.x + offset.x;
-            pos.z = offset.z;
-            transform.position = pos;
+            followPoint = target.position;
         }
         
+        if (followPoint.x > 0 && followPoint.y > -3)
+        {
+            transform.position = followPoint + offset;
+        }
+        else if (followPoint.y > 2)
+        {
+            Vector3 pos = transform.position;
+            pos.y = followPoint.y + offset.y;
+            pos.z = offset.z;
+            transform.position = pos;
+        }
+        else if (followPoint.x > 0)
+        {
+            Vector3 pos = transform.position;
+            pos.x = followPoint.x + offset.x;
+            pos.z = offset.z;
+            transform.position = pos;
+        }
+        else
+        {
+            Vector3 pos = transform.position;
+            pos.y = followPoint.y + offset.y;
+            pos.z = offset.z;
+            transform.position = pos;
+        }
     }
 }

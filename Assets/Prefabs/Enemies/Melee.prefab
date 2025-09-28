@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   player: {fileID: 916877423513603861, guid: 56120544b66af4084a6b253a659273ee, type: 3}
-  distanceAgro: 5
+  distanceAgro: 10
   enemyType: 1
   facingLeft: 1
 --- !u!114 &3708118582038462368

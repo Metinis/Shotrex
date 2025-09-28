@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   player: {fileID: 0}
-  distanceAgro: 10
+  distanceAgro: 15
   enemyType: 3
   facingLeft: 1
 --- !u!114 &5000869177413132979

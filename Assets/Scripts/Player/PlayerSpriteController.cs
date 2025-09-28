@@ -45,7 +45,7 @@ public class PlayerSpriteController : MonoBehaviour
         if (Keyboard.current.wKey.isPressed) input.y += 1;
         if (Keyboard.current.sKey.isPressed) input.y -= 1;
 
-        if (Math.Abs(input.x) > 0 && controller.IsGrounded())
+        if (Math.Abs(input.x) > 0 && controller.IsGrounded() && !controller.IsCrouching())
         {
             timer += Time.deltaTime;
             if (timer >= frameRate)
@@ -55,7 +55,7 @@ public class PlayerSpriteController : MonoBehaviour
                 sr.sprite = walkSprites[walkFrame];
             }
         }
-        else if(!controller.IsGrounded())
+        else if(!controller.IsGrounded() || controller.IsCrouching())
         {
             sr.sprite = jumpSprite;
         }
@@ -68,7 +68,7 @@ public class PlayerSpriteController : MonoBehaviour
             }
             walkingRight = true;
         }
-        else if(input.x == 0 && controller.IsGrounded())
+        else if(input.x == 0 && controller.IsGrounded() && !controller.IsCrouching())
         {
             sr.sprite = idleSprite;
             idle = true;
@@ -103,7 +103,9 @@ public class PlayerSpriteController : MonoBehaviour
 
     void Rotate()
     {
-        transform.Rotate(Vector3.up, 180);
+        Collider2D col = GetComponent<Collider2D>();
+        Vector3 center = col.bounds.center;
+        transform.RotateAround(center, Vector3.up, 180f);
     }
 
     public void SetSprites(Gun gun)

@@ -6,6 +6,7 @@ public class EnemyCollision : MonoBehaviour
     public int health = 3;
     public int damage;
     public int scoreValue = 1;
+    public GameObject barrier;
     private float timer = 0.0f;
     private float durationCollision = 1.0f;
     bool flipped = false;
@@ -19,6 +20,10 @@ public class EnemyCollision : MonoBehaviour
             {
                 GameObject scoreSystem = GameObject.Find("ScoreSystem");
                 scoreSystem.GetComponent<ScoreSystem>().AddScore(scoreValue);
+                if (GetComponent<EnemyMovement>().enemyType == EnemyType.Boss && barrier != null)
+                {
+                    barrier.SetActive(false);
+                }
                 Destroy(gameObject);
             }
         }

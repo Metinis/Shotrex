@@ -11,6 +11,7 @@ TagManager:
   - PowerUp
   - EnemyBullet
   - Tile
+  - BossBorder
   layers:
   - Default
   - TransparentFX

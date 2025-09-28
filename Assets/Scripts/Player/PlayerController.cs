@@ -13,10 +13,37 @@ public class PlayerController : MonoBehaviour
     
     bool jump = false;
     bool grounded = false;
+    bool crouch = false;
+    
+    private BoxCollider2D box;
+    private CapsuleCollider2D capsule;
+
+    private Vector2 boxOriginalSize;
+    private Vector2 boxOriginalOffset;
+
+    private Vector2 capsuleOriginalSize;
+    private Vector2 capsuleOriginalOffset;
+
+    private Vector3 originalScale;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        box = GetComponent<BoxCollider2D>();
+        capsule = GetComponent<CapsuleCollider2D>();
+
+        if (box != null)
+        {
+            boxOriginalSize = box.size;
+            boxOriginalOffset = box.offset;
+        }
+        if (capsule != null)
+        {
+            capsuleOriginalSize = capsule.size;
+            capsuleOriginalOffset = capsule.offset;
+        }
+
+        originalScale = transform.localScale;
     }
 
     void Update()
@@ -24,6 +51,8 @@ public class PlayerController : MonoBehaviour
         input.x = 0;
         if (Keyboard.current.dKey.isPressed) input.x += 1;
         if (Keyboard.current.aKey.isPressed) input.x -= 1;
+        if (Keyboard.current.sKey.isPressed) input.y -= 1;
+        if (Keyboard.current.wKey.isPressed) input.y += 1;
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             jump = true;
@@ -37,6 +66,17 @@ public class PlayerController : MonoBehaviour
         float movement = Mathf.Sign(speedDiff) * acceleration * Time.fixedDeltaTime;
         if (Mathf.Abs(movement) > Mathf.Abs(speedDiff)) movement = speedDiff;
         grounded = IsGrounded();
+        if (!crouch && IsCrouching())
+        {
+            crouch = true;
+            HandleCrouch(crouch);
+        }
+        else if (crouch && !IsCrouching())
+        {
+            crouch = false;
+            HandleCrouch(crouch);
+        }
+        
         
         float yVelocity = rb.linearVelocity.y;
         if (grounded && !jump)
@@ -52,6 +92,50 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x + movement, yVelocity);
         
     }
+    void HandleCrouch(bool crouching)
+    {
+        // collider part
+        if (box != null)
+        {
+            if (crouching)
+            {
+                box.size = new Vector2(boxOriginalSize.x, boxOriginalSize.y * 0.5f);
+                box.offset = new Vector2(boxOriginalOffset.x, boxOriginalOffset.y * 0.5f);
+            }
+            else
+            {
+                box.size = boxOriginalSize;
+                box.offset = boxOriginalOffset;
+            }
+        }
+
+        if (capsule != null)
+        {
+            if (crouching)
+            {
+                capsule.size = new Vector2(capsuleOriginalSize.x, capsuleOriginalSize.y * 0.5f);
+                capsule.offset = new Vector2(capsuleOriginalOffset.x, capsuleOriginalOffset.y * 0.5f);
+            }
+            else
+            {
+                capsule.size = capsuleOriginalSize;
+                capsule.offset = capsuleOriginalOffset;
+            }
+        }
+
+        // sprite part (scale)
+        if (crouching)
+        {
+            // scale down vertically
+            transform.localScale = new Vector3(originalScale.x, originalScale.y * 0.5f, originalScale.z);
+        }
+        else
+        {
+            // reset scale
+            transform.localScale = originalScale;
+        }
+    }
+
 
     public bool IsGrounded()
     {
@@ -71,6 +155,11 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(origin, Vector2.down * (size.y/2 + extraHeight), Color.red);
 
         return hit.collider != null;
+    }
+
+    public bool IsCrouching()
+    {
+        return Keyboard.current.sKey.isPressed;
     }
 
     public bool IsJumping()
