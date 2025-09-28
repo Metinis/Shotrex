@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7297050344824964213}
   - component: {fileID: 5159390126617451780}
   - component: {fileID: -2966613418052923911}
+  - component: {fileID: -7570668363738508697}
   m_Layer: 11
   m_Name: Coin
   m_TagString: Coin
@@ -87,7 +88,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!61 &-2966613418052923911
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134,3 +135,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.29032257, y: 0.48387095}
   m_EdgeRadius: 0
+--- !u!114 &-7570668363738508697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822320240156417135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bea6b811cfde94d8cabf5a3d55a43e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -1145248860, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  - {fileID: 724322045, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
+  frameRate: 0.3
