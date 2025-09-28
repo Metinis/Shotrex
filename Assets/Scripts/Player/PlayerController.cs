@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
         if (grounded && jump)
         {
             yVelocity = jumpForce;
+            GetComponent<RetroSound>().PlayJump();
             jump = false;
         }
         rb.linearVelocity = new Vector2(rb.linearVelocity.x + movement, yVelocity);

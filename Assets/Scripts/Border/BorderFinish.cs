@@ -12,6 +12,7 @@ public class BorderFinish : MonoBehaviour
 
     void FinishLevel()
     {
+        Checkpoint.lastCheckpoint = new Vector3(-10, -3, 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5839500258974695961}
   - component: {fileID: 2730675252740967692}
   - component: {fileID: 2097045608424091324}
+  - component: {fileID: -3366906604163730253}
   m_Layer: 6
   m_Name: Boss
   m_TagString: Enemy
@@ -106,9 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f9a840490b9d4195a54fce73c8d423f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 25
   damage: 1
   scoreValue: 50
+  barrier: {fileID: 0}
 --- !u!50 &3394695945380384500
 Rigidbody2D:
   serializedVersion: 5
@@ -232,3 +234,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.06614685, y: 0.033073425}
   m_Radius: 2.167057
+--- !u!114 &-3366906604163730253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6359473828337973439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c473b0cb894d46e0912b71047150ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}

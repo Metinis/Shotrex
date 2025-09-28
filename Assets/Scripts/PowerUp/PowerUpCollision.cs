@@ -7,6 +7,7 @@ public class PowerUpCollision : MonoBehaviour
         if (other.tag == "Player")
         {
             other.GetComponent<PlayerShooter>().UpgradeGun();
+            other.GetComponent<RetroSound>().PlayPowerUp();
             Destroy(gameObject);
         }
     }

@@ -16,6 +16,7 @@ public class EnemyCollision : MonoBehaviour
         {
             health -= 1;
             GetComponent<Flash>().FlashSprite();
+            GetComponent<RetroSound>().PlayEnemyHit();
             if (health <= 0)
             {
                 GameObject scoreSystem = GameObject.Find("ScoreSystem");

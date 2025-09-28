@@ -18,7 +18,7 @@ public class BoxCollision : MonoBehaviour
             {
                 Instantiate(powerUp, transform.position, Quaternion.identity);
             }
-            
+            GetComponent<RetroSound>().PlayBoxBreak();
             Destroy(gameObject);
         }
     }

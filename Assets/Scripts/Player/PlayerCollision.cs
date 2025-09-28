@@ -36,6 +36,7 @@ public class PlayerCollision : MonoBehaviour
         GetComponent<PlayerShooter>().DowngradeGun();
         gameObject.layer = LayerMask.NameToLayer("PlayerInvincible");
         hit = true;
+        GetComponent<RetroSound>().PlayHit();
         GetComponent<Flash>().FlashSprite();
     }
 
@@ -53,6 +54,11 @@ public class PlayerCollision : MonoBehaviour
                 gameObject.layer = LayerMask.NameToLayer("Player");
                 duration = 0.0f;
             }
+        }
+
+        if (transform.position.y < -10)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         
     }

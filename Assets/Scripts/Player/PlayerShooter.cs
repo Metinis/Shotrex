@@ -64,6 +64,7 @@ public class PlayerShooter : MonoBehaviour
                 direction = Vector2.down;
             }
             bullet.GetComponent<BulletMovement>().direction = direction;
+            GetComponent<RetroSound>().PlayShot();
             Instantiate(bullet, transform.position, Quaternion.identity);
             if (currentGun == Gun.Shotgun)
             {

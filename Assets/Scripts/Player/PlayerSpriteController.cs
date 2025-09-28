@@ -6,10 +6,13 @@ public class PlayerSpriteController : MonoBehaviour
 {
     public Sprite idleSpritePistol;
     public Sprite jumpSpritePistol;
+    public Sprite crouchSpritePistol;
     public Sprite idleSpriteRifle;
     public Sprite jumpSpriteRifle;
+    public Sprite crouchSpriteRifle;
     public Sprite idleSpriteShotgun;
     public Sprite jumpSpriteShotgun;
+    public Sprite crouchSpriteShotgun;
     public Sprite[] walkSpritesPistol;
     public Sprite[] walkSpritesRifle;
     public Sprite[] walkSpritesShotgun;
@@ -19,6 +22,7 @@ public class PlayerSpriteController : MonoBehaviour
     private Sprite[] walkSprites;
     private Sprite jumpSprite;
     private Sprite idleSprite;
+    private Sprite crouchSprite;
 
     public float frameRate = 0.1f;
     public bool walkingRight = true;
@@ -55,9 +59,13 @@ public class PlayerSpriteController : MonoBehaviour
                 sr.sprite = walkSprites[walkFrame];
             }
         }
-        else if(!controller.IsGrounded() || controller.IsCrouching())
+        else if(!controller.IsGrounded() && !controller.IsCrouching())
         {
             sr.sprite = jumpSprite;
+        }
+        else if (controller.IsCrouching())
+        {
+            sr.sprite = crouchSprite;
         }
         if (input.x > 0)
         {
@@ -115,18 +123,21 @@ public class PlayerSpriteController : MonoBehaviour
             walkSprites = walkSpritesPistol;
             jumpSprite = jumpSpritePistol;
             idleSprite = idleSpritePistol;
+            crouchSprite = crouchSpritePistol;
         }
         else if (gun == Gun.Rifle)
         {
             walkSprites = walkSpritesRifle;
             jumpSprite = jumpSpriteRifle;
             idleSprite = idleSpriteRifle;
+            crouchSprite = crouchSpriteRifle;
         }
         else
         {
             walkSprites = walkSpritesShotgun;
             jumpSprite = jumpSpriteShotgun;
             idleSprite = idleSpriteShotgun;
+            crouchSprite = crouchSpriteShotgun;
         }
     }
 }

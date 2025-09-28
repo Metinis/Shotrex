@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3708118582038462368}
   - component: {fileID: 941347002931544258}
   - component: {fileID: 5875021421494909745}
+  - component: {fileID: -2749591239316825658}
   m_Layer: 6
   m_Name: Melee
   m_TagString: Enemy
@@ -146,6 +147,7 @@ MonoBehaviour:
   health: 3
   damage: 1
   scoreValue: 1
+  barrier: {fileID: 0}
 --- !u!50 &7506212687914118363
 Rigidbody2D:
   serializedVersion: 5
@@ -234,3 +236,16 @@ MonoBehaviour:
   - {fileID: 884211666, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
   jumpSprite: {fileID: -997244701, guid: d37e70eef34214df3b2d251af73ac71d, type: 3}
   frameRate: 0.3
+--- !u!114 &-2749591239316825658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7273618280483181183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c473b0cb894d46e0912b71047150ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6317147665399416962}
   - component: {fileID: 5066324579563001159}
   - component: {fileID: 3718064247661208769}
+  - component: {fileID: -7206527376852923461}
   m_Layer: 3
   m_Name: Box
   m_TagString: Tile
@@ -127,7 +128,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0666667, y: 1.0666667}
+    oldSize: {x: 1.032258, y: 1.032258}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -149,3 +150,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUp: {fileID: 6178824577913075288, guid: ae3c3573654ca46da922de5fc43146fc, type: 3}
   particleSystem: {fileID: 350262975857780932, guid: 5de137fd0cd444d2d9b7f116a2e6c977, type: 3}
+--- !u!114 &-7206527376852923461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270877925065389414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c473b0cb894d46e0912b71047150ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
